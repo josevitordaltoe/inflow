@@ -1,20 +1,30 @@
 import { NodeProps, Handle, Position, NodeResizer } from "reactflow";
 
-export default function Square(props: NodeProps) {
-  props.data
+type SquareProps = NodeProps & {
+  data?: {
+    label?: string,
+    what?: string,
+    who?: string,
+    where?: string,
+  }  
+
+}
+
+export default function Square(props: SquareProps) {
   return (
     <div className="flex flex-col overflow-hidden bg-zinc-300 border-2 border-blue-800 w-full min-w-[200px] max-w-[400px] h-[200px] rounded-[20px]">
       <div className="w-full h-[110px] border-b-2 border-blue-800 p-2">
-      Abrir/ Lançar um pedido de vendas interno. Inserir o produto ou serviço. Indicar no campo "Studio" se o departamento de Studio é elegível ao recebimento da comissão
+        {props.data.what}
       </div>
       <div className="w-full h-[45px] border-b-2 border-blue-800 text-center p-2">
-        Assistente Comercial
+      {props.data.who}
       </div>
       <div className="w-full text-center p-2">
-        Consystec
+        {props.data.where}
       </div>
       <NodeResizer
         minWidth={200}
+        maxWidth={400}
         minHeight={200}
         maxHeight={200}
         isVisible={true}

@@ -1,6 +1,5 @@
 import { EdgeProps, getSmoothStepPath } from 'reactflow';
 
-
 export default function DefaultEdge({
   id,
   sourceX,
@@ -10,7 +9,6 @@ export default function DefaultEdge({
   sourcePosition,
   targetPosition,
   style = {},
-  data,
   markerEnd,
 }: EdgeProps) {
   const [edgePath] = getSmoothStepPath({
@@ -27,7 +25,7 @@ export default function DefaultEdge({
       <path
       id={id}
       style={style}
-      className='react-flow__edge-path stroke-[2] stroke-zinc-300'
+      className='react-flow__edge-path stroke-[2] stroke-zinc-800'
       d={edgePath}
       markerEnd={markerEnd}
       />
