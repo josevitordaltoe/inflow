@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
-import ReactFlow, { Background, Connection, Controls, addEdge, useEdgesState, useNodesState } from 'reactflow';
-import * as Toolbar from "@radix-ui/react-toolbar"
+import ReactFlow, { Background, Connection, Controls, MiniMap, Node, addEdge, useEdgesState, useNodesState } from 'reactflow';
+
 
 import 'reactflow/dist/style.css';
 import { zinc } from 'tailwindcss/colors'
@@ -9,6 +9,7 @@ import Square from './components/nodes/Square';
 import DefaultEdge from './components/edges/DefaultEdge';
 import Start from './components/nodes/Start';
 import End from './components/nodes/End';
+import Toolbar from './components/Toolbar/Toolbar';
 
 const NODE_TYPES = {
   square: Square,
@@ -21,10 +22,10 @@ const EDGE_TYPES = {
 }
 
 
-const initialNodes = [
-  { id: '1', type: 'start',position: { x: 200, y: 400 }, data: { label: '1' } },
-  { id: '2', type: 'square',position: { x: 500, y: 360 }, data: { label: '1' } },
-  { id: '99', type: 'end',position: { x: 1200, y: 400 }, data: { label: '1' } },
+const initialNodes: Node[] = [
+  { id: '1', type: 'start',position: { x: 100, y: 400 }, data: {label: '1'} },
+  { id: '2', type: 'square',position: { x: 500, y: 360 }, data: { what: 'Abrir/ Lançar um pedido de vendas interno. Inserir o produto ou serviço. Indicar no campo "Studio" se o departamento de Studio é elegível ao recebimento da comissão', who: 'Departamento Comercial', where: 'Consystec' } },
+  { id: '99', type: 'end',position: { x: 1500, y: 400 }, data: { label: '1' } },
 
 ];
 
@@ -43,7 +44,7 @@ export default function App() {
   const addSquareNode = () => {
     setNodes(nodes => [
       ...nodes,
-      { id: crypto.randomUUID(), type: 'square',position: { x: 1200, y: 400 }, data: { label: '1' } },
+      { id: crypto.randomUUID(), type: 'square',position: { x: 1200, y: 400 }, data: { what: 'O que deve ser Feito', who: 'Departamento', where: 'Ferramenta / Método' } },
     ])
 
   }
@@ -68,13 +69,9 @@ export default function App() {
           size={0}
           color={zinc[200]} />
           <Controls />
+          <MiniMap />
         </ReactFlow>
-        <Toolbar.Root className='fixed bottom-20 left-1/2 -translate-x-1/2 bg-white rounded-2xl shadow-lg border border-zinc-300 px-8 h-20 w-96 overflow-visible'>
-          <Toolbar.Button 
-            className='w-20 h-20 bg-zinc-600 rounded-xl transition-transform hover:-translate-y-5'
-            onClick={addSquareNode} 
-          />
-        </Toolbar.Root>
+        <Toolbar onClickSquare={addSquareNode} />
       </div>
     </div>
   );
